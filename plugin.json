@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "wavelength",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Turn sales calls, meeting notes, and process descriptions into editable process flow diagrams in Wavelength.",
   "author": {
     "name": "Wavelength",
@@ -109,7 +109,8 @@
           ]
         },
         "commerce": false,
-        "commerce_description": "This plugin does not sell products or process payments."
+        "commerce_description": "This plugin does not sell products or process payments.",
+        "demo_recording_url": "https://github.com/mitchkj25/wavelength-chatgpt-plugin/blob/main/docs/wavelength-chatgpt-demo.mp4"
       },
       "publication": {
         "release_notes": "Initial release: create, find, edit, summarize, and export process flows from ChatGPT."
