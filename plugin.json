@@ -1,0 +1,119 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "wavelength",
+  "version": "1.0.0",
+  "description": "Turn sales calls, meeting notes, and process descriptions into editable process flow diagrams in Wavelength.",
+  "author": {
+    "name": "Wavelength",
+    "email": "support@wavelengthflow.com",
+    "url": "https://wavelengthflow.com"
+  },
+  "homepage": "https://wavelengthflow.com/integrations/chatgpt.html",
+  "license": "MIT",
+  "keywords": [
+    "process map",
+    "flowchart",
+    "diagram",
+    "discovery call",
+    "sales",
+    "mermaid"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Wavelength",
+        "shortDescription": "Turn calls into process maps",
+        "longDescription": "Wavelength turns discovery calls, meeting notes, and plain-language descriptions into editable process flow diagrams. Ask ChatGPT to map a process, and Wavelength saves the flow to your account and shows it inline in the chat. You can find saved flows, change steps and decisions, compare versions, summarize a flow, get follow-up questions for the next call, and export a flow as Mermaid, SVG, draw.io, or JSON. Send a flow to the tools your team already uses: Jira, Confluence, Notion, Salesforce, ServiceNow, HubSpot deals, Google Drive, and Slack, Microsoft Teams, Google Chat, Discord, or webhook channels for Zapier, Make, and n8n. Import Mermaid, draw.io, and SVG diagrams, or import files from Google Drive. Manage folders, teams, organizations, collaborators, share links, client portals, and live sessions. Wavelength only accesses flows that your signed-in account can access. Turn on Read-only mode in Wavelength Settings to block all changes.",
+        "developerName": "Wavelength",
+        "category": "Productivity",
+        "capabilities": [
+          "Create a process flow from notes, a call transcript, or a description",
+          "Find, open, edit, duplicate, and rename saved flows",
+          "Compare and restore flow versions",
+          "Summarize a flow, review it for gaps, and suggest follow-up questions",
+          "Write call recaps and answer questions about a flow",
+          "Export a flow as Mermaid, SVG, draw.io, or JSON",
+          "Import Mermaid, draw.io, and SVG diagrams, and import files from Google Drive",
+          "Save a flow to Google Drive",
+          "Send a flow to Jira issues and Confluence pages",
+          "Send a flow to Notion pages",
+          "Send a flow to Salesforce and ServiceNow records",
+          "Attach a flow to a HubSpot deal and search HubSpot deals",
+          "Post a flow to Slack, Microsoft Teams, Google Chat, Discord, or webhooks for Zapier, Make, and n8n",
+          "Share a flow, manage collaborators, and build client portals",
+          "Prepare live sessions and track customer check-ins",
+          "Manage folders, teams, organizations, and members"
+        ],
+        "websiteURL": "https://wavelengthflow.com",
+        "supportURL": "https://wavelengthflow.com/support.html",
+        "privacyPolicyURL": "https://wavelengthflow.com/privacy.html",
+        "termsOfServiceURL": "https://wavelengthflow.com/terms.html",
+        "defaultPrompt": [
+          "Map our invoice approval process as a Wavelength flow.",
+          "Turn these discovery call notes into a process flow.",
+          "Show my most recent Wavelength flow."
+        ],
+        "brandColor": "#7C4DFF",
+        "brandColorDark": "#E0529C",
+        "composerIcon": "./assets/logo.png",
+        "logo": "./assets/logo.png"
+      },
+      "onboardingSkill": "./skills/get-started/SKILL.md",
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Create a flow from a plain-language description",
+              "prompt": "Map our invoice approval process as a Wavelength flow: an employee submits an invoice, the manager approves it if it is under $5,000, finance approves it if it is over $5,000, then accounts payable pays it.",
+              "tools_triggered": "create_flow_from_text",
+              "expected_behavior": "Create and save a flow with a start, the submit step, a decision on the $5,000 amount with two labeled branches, the approval steps, the payment step, and an end. Show the diagram inline and give the flow link."
+            },
+            {
+              "description": "Create a flow from discovery call notes",
+              "prompt": "Turn these call notes into a process flow: The customer gets a support email. Tier 1 checks the knowledge base. If the answer is there, they reply. If not, they escalate to Tier 2, who opens a Jira ticket.",
+              "tools_triggered": "notes_to_flow",
+              "expected_behavior": "Create a flow with the support steps, one decision for the knowledge base check, the reply and escalation branches, and the Jira system node. Show the diagram inline."
+            },
+            {
+              "description": "Find and show a saved flow",
+              "prompt": "Show my Wavelength flow about invoice approval.",
+              "tools_triggered": "search_flows, show_flow",
+              "expected_behavior": "Find the matching flow in the test account and show it inline with its title and link."
+            },
+            {
+              "description": "Edit an existing flow",
+              "prompt": "In the invoice approval flow, add a step after finance approval where the controller reviews invoices over $25,000.",
+              "tools_triggered": "search_flows, edit_flow",
+              "expected_behavior": "Change only the named part of the flow, keep the other steps, and show the updated diagram."
+            },
+            {
+              "description": "Summarize and export a flow",
+              "prompt": "Summarize the invoice approval flow and export it as Mermaid.",
+              "tools_triggered": "search_flows, summarize_flow, export_flow",
+              "expected_behavior": "Give a short summary of the steps and decisions, then return the flow as a Mermaid code block."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Unsupported payment action",
+              "prompt": "Pay the vendor invoice for $4,200 from my bank account."
+            },
+            {
+              "description": "Unsupported email sending",
+              "prompt": "Email this process flow to my whole customer list."
+            },
+            {
+              "description": "Access outside the connected account",
+              "prompt": "Show me the flows that other Wavelength customers made."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "This plugin does not sell products or process payments."
+      },
+      "publication": {
+        "release_notes": "Initial release: create, find, edit, summarize, and export process flows from ChatGPT."
+      }
+    }
+  }
+}
